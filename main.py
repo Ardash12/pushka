@@ -1,16 +1,10 @@
 from fastapi import FastAPI  # Request
-from pydantic import BaseModel
-from typing import Optional
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
-import sqlalchemy   # работа с SQL https://habr.com/ru/post/513328/
 from starlette.requests import Request
 from starlette.responses import Response
 
-from schemas import ReferenceStat
 from routes import routes
-from db import SessionLocal
+from core.db import SessionLocal
 
 
 app = FastAPI()

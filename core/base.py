@@ -1,3 +1,3 @@
-from db import Base
+from .db import Base
 from reference.models import Reference
 

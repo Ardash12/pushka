@@ -1,3 +1,4 @@
+import sys
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -5,9 +6,10 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from db import SQLALCHEMY_DATABASE_URL
-from base import Base
+sys.path = ['', '..'] + sys.path[1:]
 
+from core.db import SQLALCHEMY_DATABASE_URL
+from core.base import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
