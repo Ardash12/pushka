@@ -1,9 +1,10 @@
 from sqlalchemy import Column, String, Integer, DateTime
-
 from core.db import Base
 
 
 class Reference(Base):
+    """Модели для создания таблицы в БД"""
+
     __tablename__ = 'reference_stat'
     id = Column(Integer, primary_key=True, index=True, unique=True)
     user_id = Column(Integer)
