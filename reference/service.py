@@ -4,7 +4,7 @@ from reference.schemas import ReferenceBase #, ReferenceList
 
 
 def get_reference_list(db: Session):
-    return db.query(ReferenceBase).all()
+    return db.query(Reference).all()
 
 
 def post_reference(db: Session, item: ReferenceBase):

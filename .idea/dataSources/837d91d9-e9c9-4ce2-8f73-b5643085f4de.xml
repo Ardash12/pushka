@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.32">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>766</IntrospectionStateNumber>
+      <IntrospectionStateNumber>790</IntrospectionStateNumber>
       <ServerVersion>14.1</ServerVersion>
       <StartupTime>1644226767</StartupTime>
       <TimeZones>true ACDT
@@ -804,9 +804,9 @@ false Zulu
 13388||10|C|G
 13388||-9223372036854775808|U|G
 13388||10|U|G</Grants>
-      <IntrospectionStateNumber>767</IntrospectionStateNumber>
+      <IntrospectionStateNumber>791</IntrospectionStateNumber>
       <ObjectId>16394</ObjectId>
-      <Relations>sequence|table|16431|16432|1
+      <Relations>sequence|table|16446|16447|1
 </Relations>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4232,26 +4232,26 @@ false Zulu
     <schema id="263" parent="3" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>767</IntrospectionStateNumber>
+      <IntrospectionStateNumber>791</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>527</StateNumber>
       <OwnerName>postgres</OwnerName>
     </schema>
     <sequence id="264" parent="263" name="reference_stat_id_seq">
       <DataType>integer|0s</DataType>
-      <ObjectId>16431</ObjectId>
-      <StateNumber>764</StateNumber>
+      <ObjectId>16446</ObjectId>
+      <StateNumber>780</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="265" parent="263" name="alembic_version">
-      <ObjectId>16426</ObjectId>
-      <StateNumber>759</StateNumber>
+      <ObjectId>16441</ObjectId>
+      <StateNumber>779</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="266" parent="263" name="reference_stat">
-      <ObjectId>16432</ObjectId>
-      <StateNumber>764</StateNumber>
+      <ObjectId>16447</ObjectId>
+      <StateNumber>780</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
@@ -4259,7 +4259,7 @@ false Zulu
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>759</StateNumber>
+      <StateNumber>779</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="268" parent="265" name="alembic_version_pkc">
@@ -4267,78 +4267,59 @@ false Zulu
       <ColNames>version_num</ColNames>
       <CollationIds>100</CollationIds>
       <CollationNames>default</CollationNames>
-      <ObjectId>16429</ObjectId>
+      <ObjectId>16444</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>759</StateNumber>
+      <StateNumber>779</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="269" parent="265" name="alembic_version_pkc">
       <ColNames>version_num</ColNames>
-      <ObjectId>16430</ObjectId>
+      <ObjectId>16445</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>759</StateNumber>
-      <UnderlyingIndexId>16429</UnderlyingIndexId>
+      <StateNumber>779</StateNumber>
+      <UnderlyingIndexId>16444</UnderlyingIndexId>
     </key>
     <column id="270" parent="266" name="id">
       <DataType>integer|0s</DataType>
       <DefaultExpression>nextval(&apos;reference_stat_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>764</StateNumber>
+      <StateNumber>780</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="271" parent="266" name="user_id">
       <DataType>integer|0s</DataType>
       <Position>2</Position>
-      <StateNumber>764</StateNumber>
+      <StateNumber>780</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="272" parent="266" name="event_id">
       <DataType>integer|0s</DataType>
       <Position>3</Position>
-      <StateNumber>764</StateNumber>
+      <StateNumber>780</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="273" parent="266" name="event_type">
       <DataType>varchar|0s</DataType>
       <Position>4</Position>
-      <StateNumber>764</StateNumber>
+      <StateNumber>780</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="274" parent="266" name="date">
       <DataType>timestamp|0s</DataType>
       <Position>5</Position>
-      <StateNumber>764</StateNumber>
+      <StateNumber>780</StateNumber>
       <TypeId>1114</TypeId>
     </column>
     <index id="275" parent="266" name="ix_reference_stat_id">
       <ClassIds>1978</ClassIds>
       <ColNames>id</ColNames>
       <CollationIds>0</CollationIds>
-      <ObjectId>16440</ObjectId>
-      <StateNumber>764</StateNumber>
+      <ObjectId>16455</ObjectId>
+      <StateNumber>780</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="276" parent="266" name="reference_stat_pkey">
-      <ClassIds>1978</ClassIds>
-      <ColNames>id</ColNames>
-      <CollationIds>0</CollationIds>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16438</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>764</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <key id="277" parent="266" name="reference_stat_pkey">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16439</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>764</StateNumber>
-      <UnderlyingIndexId>16438</UnderlyingIndexId>
-    </key>
   </database-model>
 </dataSource>
