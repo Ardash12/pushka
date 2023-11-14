@@ -1,21 +1,15 @@
 from fastapi import FastAPI
-from starlette.requests import Request
-from starlette.responses import Response
-from routes import routes
-from core.db import SessionLocal
+from starlette import status
 
+from app.schemas import Item
 
 app = FastAPI()
 
 
-@app.middleware('http')
-async def db_session_middleware(request: Request, call_next):
-    response = Response('Internet server error', status_code=500)
-    try:
-        request.state.db = SessionLocal()
-        response = await call_next(request)
-    finally:
-        request.state.db.close()
-    return response
-
-app.include_router(routes)
+@app.get(
+    path="/",
+    response_model=Item,
+    status_code=status.HTTP_200_OK,
+)
+async def root():
+    return {"message": "Hello World"}
