@@ -1,7 +1,7 @@
-from .category import Category
+from .category import CategoryModel
 from .item import ItemModel
 
 __all__ = (
-    'Category',
+    'CategoryModel',
     'ItemModel',
 )
