@@ -1,26 +1,17 @@
-from fastapi import FastAPI
-from starlette import status
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+import uvicorn
 
-from app.schemas import Item
-from . import SessionLocal
+from fastapi import APIRouter, FastAPI
+
+# from .core.router import api_router
+from categories import category_router
+
 
 app = FastAPI()
+app.include_router(category_router, prefix='/category')
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-@app.get(
-    path="/",
-    response_model=Item,
-    status_code=status.HTTP_200_OK,
-)
-async def root():
-    return {"message": "Hello World"}
+def main() -> None:
+    uvicorn.run(app, host="127.0.0.1", port=8000)
+    
+if __name__ == "__main__":
+    main()
+    

@@ -6,3 +6,7 @@ env/
 **/migrations/*
 db.sqlite3
 .env
+*.db
+alembic/
+.idea/
+alembic.ini
