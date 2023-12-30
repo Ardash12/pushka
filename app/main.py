@@ -1,16 +1,21 @@
 import uvicorn
+import sys
 
-from fastapi import APIRouter, FastAPI
+from fastapi import FastAPI
 
-# from .core.router import api_router
-from categories import category_router
+from app.categories import category_router
+from app.items import item_router
 
 
-app = FastAPI()
-app.include_router(category_router, prefix='/category')
+# sys.path.append("C:\projects\fastapi\app")
+# print(sys.path)
+
+application = FastAPI()
+application.include_router(category_router, prefix='/category', tags=['Category'])
+application.include_router(item_router, prefix='/item', tags=['Item'])
 
 def main() -> None:
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run('main:application', host="127.0.0.1", port=8000, reload=True)
     
 if __name__ == "__main__":
     main()

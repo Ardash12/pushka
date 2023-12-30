@@ -1,9 +1,9 @@
 from .models import CategoryModel
-from .shemas import Catygory
+from .schemas import CatygorySchema
 from .router import router as category_router
 
 __all__ = (
     'CategoryModel',
-    'Catygory',
+    'CatygorySchema',
     'category_router',
 )

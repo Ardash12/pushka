@@ -1,9 +1,10 @@
-from typing import Union
+from typing import Optional
 
 from pydantic import BaseModel
 
 
-class ItemResponse(BaseModel):
+class ItemSchema(BaseModel):
     name: str
-    description: Union[str, None] = None
+    description: Optional[str] = None
+    # reviews: Optional[list] = None
     

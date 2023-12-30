@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class Catygory(BaseModel):
+class CatygorySchema(BaseModel):
     name: str
 
     class Config:

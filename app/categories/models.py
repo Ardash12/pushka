@@ -7,4 +7,4 @@ class CategoryModel(Base):
     __tablename__ = "category"
     
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str]
+    name: Mapped[str] = mapped_column(nullable=False, unique=True)
