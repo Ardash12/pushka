@@ -5,8 +5,8 @@ from sqlalchemy import select, insert
 from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .models import ItemModel
-from .shemas import ItemSchema
+from .models import ItemModel, ItemReviewModel
+from .shemas import ItemSchema, ItemReviewSchema
 from app.core import DatabaseSession
 
 
@@ -17,7 +17,6 @@ def get_all_items_core(session: AsyncSession):
     return(
         (session.execute(
             select(ItemModel)
-            # .options(selectinload(ItemModel.reviews))
         )
     ).scalars().all()
     )
@@ -51,6 +50,31 @@ def add_items(
     request: ItemSchema = Body(...),
 ):
     add_items_core(session=session, request=request)
+    return {
+        "ok": True,
+        "result": True,
+    }
+
+
+def add_review_items_core(session: AsyncSession, request):
+    session.execute(
+        insert(ItemReviewModel).values({
+                    ItemReviewModel.grade: request.grade,
+                    ItemReviewModel.item_id: request.item_id,
+                })
+            )
+    session.commit()
+
+
+@router.post(
+    path="/add_review",
+    status_code=status.HTTP_201_CREATED,
+)
+def add_review_items(
+    session: DatabaseSession,
+    request: ItemReviewSchema = Body(...),
+):
+    add_review_items_core(session=session, request=request)
     return {
         "ok": True,
         "result": True,
