@@ -1,4 +1,4 @@
-import mysql.connector
+# import mysql.connector
 from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
@@ -13,6 +13,7 @@ from sqlalchemy.orm import sessionmaker, Session
 #     database="fastapi_db"
 # )
 DATABASE_URL = "sqlite:///./test.db"
+# DATABASE_URL = "postgresql://postgres:postgres@postgresserver/fastapi"
 
 # async_engine = create_async_engine(
 #     DATABASE_URL, 
