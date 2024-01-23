@@ -6,7 +6,7 @@ from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from .models import ItemModel, ItemReviewModel
-from .shemas import ItemSchema, ItemReviewSchema
+from .shemas import ItemRequest, ItemRespons, ItemReviewRequest
 from app.core import DatabaseSession, hash_password
 
 
@@ -20,7 +20,7 @@ def get_all_items_core(session: AsyncSession):
 
 @router.get(
     path='/all',
-    response_model=list[ItemSchema],
+    response_model=list[ItemRespons],
     status_code=status.HTTP_200_OK,
 )
 def get_all_items(session: DatabaseSession):
@@ -39,7 +39,7 @@ def get_item_core(session: AsyncSession, item_id: int) -> ItemModel:
 
 @router.get(
     path='/{item_id}',
-    response_model=ItemSchema,
+    response_model=ItemRespons,
     status_code=status.HTTP_200_OK,
 )
 def get_item(
@@ -67,7 +67,7 @@ def add_items_core(session: AsyncSession, request):
 )
 def add_items(
     session: DatabaseSession,
-    request: ItemSchema = Body(...),
+    request: ItemRequest = Body(...),
 ):
     add_items_core(session=session, request=request)
     return {
@@ -92,7 +92,7 @@ def add_review_items_core(session: AsyncSession, request):
 )
 def add_review_items(
     session: DatabaseSession,
-    request: ItemReviewSchema = Body(...),
+    request: ItemReviewRequest = Body(...),
 ):
     add_review_items_core(session=session, request=request)
     return {
