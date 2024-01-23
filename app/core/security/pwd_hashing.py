@@ -13,3 +13,7 @@ pwd_context = CryptContext(
 
 def hash_password(password: str) -> str:
     return cast(str, pwd_context.hash(password))
+
+
+def check_hashed_password(password: str, hashed: str) -> bool:
+    return cast(bool, pwd_context.verify(password, hashed))

@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from .models import ItemModel, ItemReviewModel
 from .shemas import ItemRequest, ItemRespons, ItemReviewRequest
-from app.core import DatabaseSession, hash_password
+from app.core import DatabaseSession
 
 
 router = APIRouter()
