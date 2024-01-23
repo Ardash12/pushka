@@ -10,10 +10,11 @@ venv\scripts\activate
 ```
 pip install -r requirements.txt
 ```
-Миграции
+Миграции (пропустить, тестовая бд)
 ```
 alembic init alembic
-alembic revision --autogenerate -m "initial"
+alembic stamp head --purge
+alembic revision --autogenerate -m "igrations"
 alembic upgrade head
 ```
 Запуск сервера
@@ -32,7 +33,12 @@ app
 │   ├── router.py
 │   └── schemas.py
 │
-└──item
+├──items
+│   ├── model.py
+│   ├── router.py
+│   └── schemas.py
+│
+└──users
     ├── model.py
     ├── router.py
     └── schemas.py

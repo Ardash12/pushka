@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from .models import ItemModel, ItemReviewModel
 from .shemas import ItemSchema, ItemReviewSchema
-from app.core import DatabaseSession
+from app.core import DatabaseSession, hash_password
 
 
 router = APIRouter()
@@ -15,12 +15,7 @@ router = APIRouter()
 # ====================================GET===================================
 
 def get_all_items_core(session: AsyncSession):
-    return(
-        (session.execute(
-            select(ItemModel)
-        )
-    ).scalars().all()
-    )
+    return (session.execute(select(ItemModel))).scalars().all()
 
 
 @router.get(
