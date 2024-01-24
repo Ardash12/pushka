@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Request
 from fastapi.param_functions import Body, Path
 from fastapi.responses import Response
-from fastapi_jwt_auth import AuthJWT
+# from fastapi_jwt_auth import AuthJWT
 from starlette import status
 from sqlalchemy import select, insert
 from sqlalchemy.orm import selectinload
@@ -13,6 +13,8 @@ from app.core.security import (
     hash_password, 
     check_hashed_password, 
     set_and_create_tokens_cookies,
+    create_access_token,
+    get_token_from_cookie
 )
 
 
@@ -62,7 +64,7 @@ def sign_up(
 def sign_in(
     response: Response,
     session: DatabaseSession,
-    authorize: AuthJWT = Depends(),
+    # authorize: AuthJWT = Depends(),
     request: SignInRequest = Body(),
 ):
     user = (
@@ -72,9 +74,27 @@ def sign_in(
     if not user or not check_hashed_password(password=request.password, hashed=user.password):
         raise HTTPException(status_code=403, detail="Email or password is incorrect")
     
-    set_and_create_tokens_cookies(response=response, subject=user.id, authorize=authorize)
+    # set_and_create_tokens_cookies(response=response, subject=user.id, authorize=authorize)
+    temp = create_access_token(response=response, data={"user_id": user.id})
     
     return {
         "ok": True,
-        "result": True,
+        "result": temp,
+    }
+    
+@router.get(
+    path='/info',
+    summary="WORKS: Get user info.",
+    status_code=status.HTTP_200_OK,
+)
+def get_user_info(
+    response: Response,
+    session: DatabaseSession,
+    # authorize: AuthJWT = Depends(),
+    request: Request,
+):
+    temp = get_token_from_cookie(request=request)
+    return {
+        "ok": True,
+        "result": temp,
     }
