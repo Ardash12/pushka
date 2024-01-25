@@ -20,13 +20,11 @@ class ItemRespons(BaseModel):
 # ====================================Request===================================
     
 class ItemReviewRequest(BaseModel):
-    id: int
     grade: int
     item_id: Optional[int] = None
     
     
 class ItemRequest(BaseModel):
-    id: int
     name: str
     description: Optional[str] = None
     reviews: Optional[list[int]] = None

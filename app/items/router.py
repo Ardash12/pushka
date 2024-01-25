@@ -6,7 +6,7 @@ from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from .models import ItemModel, ItemReviewModel
-from .shemas import ItemRequest, ItemRespons, ItemReviewRequest
+from .schemas import ItemRequest, ItemRespons, ItemReviewRequest
 from app.core import DatabaseSession
 
 

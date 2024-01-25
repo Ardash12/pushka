@@ -7,13 +7,13 @@ from sqlalchemy import select, insert
 from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.users import UserModel, SignUpRequest, SignInRequest
+from app.users import UserModel, SignUpRequest, SignInRequest, UserInfoResponse
 from app.core import DatabaseSession
 from app.core.security import (
+    AuthorizationOptional,
     hash_password, 
     check_hashed_password, 
     set_and_create_tokens_cookies,
-    create_access_token,
     get_token_from_cookie
 )
 
@@ -75,26 +75,30 @@ def sign_in(
         raise HTTPException(status_code=403, detail="Email or password is incorrect")
     
     # set_and_create_tokens_cookies(response=response, subject=user.id, authorize=authorize)
-    temp = create_access_token(response=response, data={"user_id": user.id})
+    set_and_create_tokens_cookies(response=response, data={"user_id": user.id})
     
     return {
         "ok": True,
-        "result": temp,
+        "result": True,
     }
+    
+# ====================================GET===================================
+
+def get_user_info_core(session: AsyncSession, user_id: int):
+    return (
+        session.execute(select(UserModel).where(UserModel.id == user_id))
+    ).scalar_one_or_none()
+    
     
 @router.get(
     path='/info',
     summary="WORKS: Get user info.",
+    response_model=UserInfoResponse,
     status_code=status.HTTP_200_OK,
+    
 )
 def get_user_info(
-    response: Response,
+    user: AuthorizationOptional,
     session: DatabaseSession,
-    # authorize: AuthJWT = Depends(),
-    request: Request,
 ):
-    temp = get_token_from_cookie(request=request)
-    return {
-        "ok": True,
-        "result": temp,
-    }
+    return get_user_info_core(session=session, user_id=user)
