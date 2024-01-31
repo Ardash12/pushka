@@ -14,7 +14,6 @@ from app.core.security import (
     hash_password, 
     check_hashed_password, 
     set_and_create_tokens_cookies,
-    get_token_from_cookie
 )
 
 
@@ -74,7 +73,6 @@ def sign_in(
     if not user or not check_hashed_password(password=request.password, hashed=user.password):
         raise HTTPException(status_code=403, detail="Email or password is incorrect")
     
-    # set_and_create_tokens_cookies(response=response, subject=user.id, authorize=authorize)
     set_and_create_tokens_cookies(response=response, data={"user_id": user.id})
     
     return {

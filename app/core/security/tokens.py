@@ -3,6 +3,7 @@ from typing import Annotated, Union, cast
 
 from fastapi import Depends, HTTPException, status, Request
 from fastapi.responses import Response
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt, ExpiredSignatureError
 
 from app.core.settings import jwt_settings
@@ -33,7 +34,31 @@ def set_and_create_tokens_cookies(response: Response, data: dict) -> None:
     response.set_cookie(key="refresh", value=refresh_token)
 
 
-def get_token_from_cookie(request: Request):
+# def get_refresh_token_from_cookie(request: Request):
+#     refresh_token = request.cookies.get('refresh')
+#     if not refresh_token:
+#         raise HTTPException(
+#             status_code=status.HTTP_401_UNAUTHORIZED,
+#             detail="Token not found",
+#         )
+#     try:
+#         data = jwt.decode(
+#             token=refresh_token, 
+#             key=jwt_settings.JWT_SECRET_KEY, 
+#             algorithms=jwt_settings.ALGORITHM
+#         )
+#         print("Refresh токен получен")
+#     except ExpiredSignatureError:
+#         print("Истек срок действия refresh токена")
+        
+#         raise HTTPException(
+#             status_code=status.HTTP_401_UNAUTHORIZED,
+#             detail="Could not validate credentials",
+#         )        
+#     set_and_create_tokens_cookies(response=Response, data=data)    
+        
+        
+def get_access_token_from_cookie(request: Request):
     access_token = request.cookies.get('access')
     if not access_token:
         raise HTTPException(
@@ -46,9 +71,7 @@ def get_token_from_cookie(request: Request):
             key=jwt_settings.JWT_SECRET_KEY, 
             algorithms=jwt_settings.ALGORITHM
         )
-    except ExpiredSignatureError:
-        print("Истек срок действия токена")
-        
+    except JWTError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials",
